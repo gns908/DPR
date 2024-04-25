@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <h1>해상도</h1>
+    <p>화면을 확대하거나 축소하면서 DPR을 확인해 보세요</p>
+    <p>DPR (화면 비율) : <span class="text1"></span></p>
+    <p>해상도 : <span class="text2"></span></p>
+
+    <script>
+      // 디바이스의 픽셀 비율을 확인하는 함수
+      function getDevicePixelRatio() {
+        // window 객체의 devicePixelRatio 속성 사용
+        const dpr = window.devicePixelRatio;
+        // 디바이스 픽셀 비율 출력
+        console.log(`디바이스 픽셀 비율 (DPR): ${dpr}`);
+        // 디바이스 픽셀 비율 반환
+        return dpr;
+      }
+
+      // 페이지 로딩 시 디바이스 픽셀 비율 확인
+      window.onload = getDevicePixelRatio;
+
+      //getDevicePixelRatio 값이 변하면 새로고침
+      window.onresize = function () {
+        location.reload();
+      };
+
+      document.querySelector('.text1').innerHTML = window.devicePixelRatio;
+      document.querySelector('.text2').innerHTML =
+        window.screen.width + 'x' + window.screen.height;
+
+      //만약 DPR이 1보다 작으면 폰트사이즈를 2배로 확대해서 보여준다.
+      if (window.devicePixelRatio < 1) {
+        document.body.style.fontSize = '2em';
+      }
+    </script>
+  </body>
+</html>
